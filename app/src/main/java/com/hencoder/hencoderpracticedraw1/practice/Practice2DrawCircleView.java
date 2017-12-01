@@ -8,9 +8,11 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.hencoder.hencoderpracticedraw1.Util;
+
 public class Practice2DrawCircleView extends View {
 
-    Paint mPaint;
+    Paint paint;
 
     public Practice2DrawCircleView(Context context) {
         this(context, null);
@@ -23,29 +25,48 @@ public class Practice2DrawCircleView extends View {
     public Practice2DrawCircleView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        mPaint = new Paint();
-        mPaint.setAntiAlias(true);
+        paint = new Paint();
+        paint.setAntiAlias(true);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+        int quarter = getHeight() / 4;
+
+        int centerX = getWidth() / 2;
+        int centerY = getHeight() / 2;
+
+        int x1 = centerX - quarter;
+        int y1 = centerY - quarter;
+
+        int x2 = centerX + quarter;
+        int y2 = centerY - quarter;
+
+        int x3 = centerX - quarter;
+        int y3 = centerY + quarter;
+
+        int x4 = centerX + quarter;
+        int y4 = centerY + quarter;
+
+        int length = quarter - Util.dp2px(10);
+
 //        练习内容：使用 canvas.drawCircle() 方法画圆
 //        一共四个圆：1.实心圆 2.空心圆 3.蓝色实心圆 4.线宽为 20 的空心圆
-        mPaint.setStyle(Paint.Style.FILL);
-        canvas.drawCircle(300, 150, 150, mPaint);
+        paint.setStyle(Paint.Style.FILL);
+        canvas.drawCircle(x1, y1, length, paint);
 
-        mPaint.setStyle(Paint.Style.STROKE);
-        canvas.drawCircle(700, 150, 150, mPaint);
+        paint.setStyle(Paint.Style.STROKE);
+        canvas.drawCircle(x2, y2, length, paint);
 
-        mPaint.setStyle(Paint.Style.FILL);
-        mPaint.setColor(Color.BLUE);
-        canvas.drawCircle(300, 550, 150, mPaint);
+        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(Color.BLUE);
+        canvas.drawCircle(x3, y3, length, paint);
 
-        mPaint.setColor(Color.BLACK);
-        mPaint.setStyle(Paint.Style.STROKE);
-        mPaint.setStrokeWidth(20);
-        canvas.drawCircle(700, 550, 150, mPaint);
+        paint.setColor(Color.BLACK);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(Util.dp2px(20));
+        canvas.drawCircle(x4, y4, length, paint);
     }
 }

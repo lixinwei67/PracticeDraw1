@@ -7,29 +7,28 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.hencoder.hencoderpracticedraw1.Util;
+
 public class Practice4DrawPointView extends View {
 
-    Paint mPaint;
+    Paint paint;
+
+    {
+        paint = new Paint();
+        paint.setAntiAlias(true);
+        paint.setStrokeWidth(40);
+    }
 
     public Practice4DrawPointView(Context context) {
         super(context);
-        init();
-    }
-
-    private void init() {
-        mPaint = new Paint();
-        mPaint.setAntiAlias(true);
-        mPaint.setStrokeWidth(40);
     }
 
     public Practice4DrawPointView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        init();
     }
 
     public Practice4DrawPointView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
     }
 
     @Override
@@ -39,10 +38,24 @@ public class Practice4DrawPointView extends View {
 //        练习内容：使用 canvas.drawPoint() 方法画点
 //        一个圆点，一个方点
 //        圆点和方点的切换使用 paint.setStrokeCap(cap)：`ROUND` 是圆点，`BUTT` 或 `SQUARE` 是方点
-        mPaint.setStrokeCap(Paint.Cap.ROUND);
-        canvas.drawPoint(100, 100, mPaint);
 
-        mPaint.setStrokeCap(Paint.Cap.SQUARE);
-        canvas.drawPoint(400, 100, mPaint);
+        int centerX = getWidth() / 2;
+        int centerY = getHeight() / 2;
+
+        int offset = Util.dp2px(60);
+
+        paint.setStrokeWidth(Util.dp2px(30));
+
+        paint.setStrokeCap(Paint.Cap.ROUND);
+        canvas.save();
+        canvas.translate(centerX - offset, centerY);
+        canvas.drawPoint(0, 0, paint);
+        canvas.restore();
+
+        paint.setStrokeCap(Paint.Cap.SQUARE);
+        canvas.save();
+        canvas.translate(centerX + offset, centerY);
+        canvas.drawPoint(0, 0, paint);
+        canvas.restore();
     }
 }

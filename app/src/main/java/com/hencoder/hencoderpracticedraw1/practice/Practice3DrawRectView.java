@@ -7,27 +7,26 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.hencoder.hencoderpracticedraw1.Util;
+
 public class Practice3DrawRectView extends View {
 
-    Paint mPaint;
+    Paint paint;
     public Practice3DrawRectView(Context context) {
         super(context);
-        init();
     }
 
     public Practice3DrawRectView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        init();
     }
 
     public Practice3DrawRectView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
     }
 
-    private void init() {
-        mPaint = new Paint();
-        mPaint.setAntiAlias(true);
+    {
+        paint = new Paint();
+        paint.setAntiAlias(true);
     }
     @Override
     protected void onDraw(Canvas canvas) {
@@ -35,6 +34,13 @@ public class Practice3DrawRectView extends View {
 
 //        练习内容：使用 canvas.drawRect() 方法画矩形
 
-        canvas.drawRect(300, 300, 500, 500, mPaint);
+        int length = Util.dp2px(60);
+        int centerX = getWidth() / 2;
+        int centerY = getHeight() / 2;
+
+        canvas.save();
+        canvas.translate(centerX, centerY);
+        canvas.drawRect(-length, -length, length, length, paint);
+        canvas.restore();
     }
 }
